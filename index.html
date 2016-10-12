@@ -10,7 +10,6 @@
 		body {
 			margin: 0;
 			padding: 0;
-			background: coral;
 		}
 		
 		h1 {
@@ -18,11 +17,34 @@
 			text-align: center;
 			font-family: sans-serif;
 		}
+		
+		canvas {
+			position: relative;
+			overflow: hidden;
+		}
+		
+		.child {
+			position: absolute;
+			top: -9999px;
+			bottom: -9999px;
+			left: -9999px;
+			right: -9999px;
+			margin: auto;
+			width: 200px;
+			height: 200px;
+			pointer-events:none;
+			z-index: 9000;
+		}
+		.hideChild {
+			display: none;
+		}
 	</style>
 </head>
 
 <body>
-	<h1>Click on white rectangular ;)</h1>
+	<div id ="introMessage" class="child">
+		<h1>Click on white rectangular ;)</h1>
+		<div>
 </body>
 <script type="text/javascript" src="phaser.js"></script>
 <script type="text/javascript" src="game.js"></script>

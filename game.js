@@ -1,8 +1,16 @@
-var screenHeight = 550;
-var screenWidth = 400;
+var w = window,
+  d = document,
+  e = d.documentElement,
+  g = d.getElementsByTagName('body')[0],
+  x = w.innerWidth || e.clientWidth || g.clientWidth,
+  y = w.innerHeight || e.clientHeight || g.clientHeight;
+
+var screenHeight = y;
+var screenWidth = x;
 var togleMouse = 1;
 
-var game = new Phaser.Game(screenWidth, screenHeight, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
+var game = new Phaser.Game(screenWidth, screenHeight,
+  Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render }, false);
 
 var systems = [];
 
@@ -12,23 +20,24 @@ function preload() {
 }
 
 function create() {
-
-  game.stage.backgroundColor = '#ffffff';
+  game.stage.backgroundColor = '#ffffff'
 
   //Starts the arcade physics
   game.physics.startSystem(Phaser.Physics.ARCADE);
 
   game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-  game.scale.minWidth = 200;
-  game.scale.minHeight = 225;
-  game.scale.maxWidth = 800;
-  game.scale.maxHeight = 1100;
   game.scale.pageAlignHorizontally = true;
 
   game.input.onDown.add(generateHeadSystems);
 }
 
+function hideIntro() {
+  document.getElementById("introMessage").className = "hideChild"
+}
+
 function generateHeadSystems(pointer) {
+  hideIntro();
+
   var system = new HeadSystem();
   if (togleMouse === 1) {
     system.createHead(pointer.x, pointer.y, 'jose');
@@ -49,7 +58,7 @@ function update() {
 
 function render() {
 
- }
+}
 
 function HeadSystem() {
   this.heads = [];
@@ -70,7 +79,7 @@ HeadSystem.prototype.update = function () {
   for (var i = 0; i < this.heads.length; i++) {
     var head = this.heads[i];
 
-   // head.velocityX += game.rnd.between(-0.5, 0.5);
+    // head.velocityX += game.rnd.between(-0.5, 0.5);
 
     head.x += head.velocityX;
     head.y += head.velocityY;
